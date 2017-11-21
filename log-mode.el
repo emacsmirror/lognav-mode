@@ -3,9 +3,10 @@
 ;; Copyright (C) 2016 - 2017
 
 ;; Author: Shawn Ellis <shawn.ellis17@gmail.com>
-;; Version: 0.0.2
+;; Version: 0.0.3
+;; Package-Requires: ((emacs "24.3"))
 ;; URL: https://bitbucket.org/ellisvelo/log-mode
-;; Keywords: log error log-mode
+;; Keywords: log error log-mode convenience
 ;;
 
 ;; log-mode.el is free software; you can redistribute it and/or modify
@@ -26,10 +27,10 @@
 ;;; Commentary:
 
 ;; Log-mode is a minor mode used for finding and navigating errors within a
-;; buffer or a log file. For example, M-n moves the cursor to the first occuring
-;; error within the log file. M-p moves the cursor to the previous
-;; error. Log-mode only highlights the errors that are visible on the screen
-;; rather than highlighting all errors found within the buffer. This is
+;; buffer or a log file.  For example, M-n moves the cursor to the first occuring
+;; error within the log file.  M-p moves the cursor to the previous
+;; error.  Log-mode only highlights the errors that are visible on the screen
+;; rather than highlighting all errors found within the buffer.  This is
 ;; especially useful when opening up large log files for analysis.
 
 ;; To use Log-mode add the following line in your .emacs file:
@@ -44,8 +45,10 @@
 
 (require 'easymenu)
 
-(defvar log-exception-regexp "\\(ERROR\\)\\|\\(Caused by:\\)\\|\\(nested exception is:\\)"
-  "Regular expression used for navigating errors")
+;;; Code:
+
+(defvar log-exception-regexp "\\(ERROR\\)\\|\\(WARNING\\)\\|\\(SEVERE\\)\\|\\(Caused by:\\)\\|\\(nested exception is:\\)"
+  "Regular expression used for navigating errors.")
 
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.log\\'" . log-mode))
@@ -96,7 +99,7 @@
 
 
 (defun log-highlight-region (begin end)
-  "Highlight the region specified by BEGIN and END"
+  "Highlight the region specified by BEGIN and END."
   (let  ((log-overlay (make-overlay begin end)))
     (overlay-put log-overlay 'log-overlay t)
     (overlay-put log-overlay 'face 'log-highlight-face)
@@ -112,6 +115,7 @@
     (goto-char current)))
 
 (defun log-highlight-position (lines)
+  "Return the position based upon the line number."
   (save-excursion
     (forward-line lines)
     (point)))
@@ -137,7 +141,7 @@
   (interactive)
   (occur log-exception-regexp))
 
-(defun log-mode-after-change (begin end ignored)
+(defun log-mode-after-change (_begin _end _ignored)
   "Highlight the visible errors when a buffer is idle for 3 seconds."
 
   (when (not log-mode-idle-registered)
