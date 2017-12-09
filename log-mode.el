@@ -3,7 +3,7 @@
 ;; Copyright (C) 2016 - 2017
 
 ;; Author: Shawn Ellis <shawn.ellis17@gmail.com>
-;; Version: 0.0.3
+;; Version: 0.0.4
 ;; Package-Requires: ((emacs "24.3"))
 ;; URL: https://bitbucket.org/ellisvelo/log-mode
 ;; Keywords: log error log-mode convenience
@@ -27,13 +27,13 @@
 ;;; Commentary:
 
 ;; Log-mode is a minor mode used for finding and navigating errors within a
-;; buffer or a log file.  For example, M-n moves the cursor to the first occuring
-;; error within the log file.  M-p moves the cursor to the previous
-;; error.  Log-mode only highlights the errors that are visible on the screen
-;; rather than highlighting all errors found within the buffer.  This is
-;; especially useful when opening up large log files for analysis.
+;; buffer or a log file. The keybinding M-n moves the cursor to the first error
+;; within the log file.  M-p moves the cursor to the previous error.  Log-mode
+;; only highlights the errors that are visible on the screen rather than
+;; highlighting all errors found within the buffer. This is especially useful
+;; when opening up large log files for analysis.
 
-;; To use Log-mode add the following line in your .emacs file:
+;; Add the following line in your .emacs file to use Log-mode:
 ;;
 ;; (require 'log-mode)
 ;;
@@ -51,7 +51,7 @@
   "Regular expression used for navigating errors.")
 
 ;;;###autoload
-(add-to-list 'auto-mode-alist '("\\.log\\'" . log-mode))
+(add-to-list 'auto-mode-alist '("\\.log\\.?[0-9]*\\'" . log-mode))
 
 (defvar log-mode-map nil)
 
