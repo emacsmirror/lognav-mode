@@ -27,10 +27,10 @@
 ;;; Commentary:
 
 ;; Log-mode is a minor mode used for finding and navigating errors within a
-;; buffer or a log file. The keybinding M-n moves the cursor to the first error
+;; buffer or a log file.  The keybinding M-n moves the cursor to the first error
 ;; within the log file.  M-p moves the cursor to the previous error.  Log-mode
 ;; only highlights the errors that are visible on the screen rather than
-;; highlighting all errors found within the buffer. This is especially useful
+;; highlighting all errors found within the buffer.  This is especially useful
 ;; when opening up large log files for analysis.
 
 ;; Add the following line in your .emacs file to use Log-mode:
@@ -114,19 +114,19 @@
 	  (log-highlight-region (line-beginning-position) (line-end-position))))
     (goto-char current)))
 
-(defun log-highlight-position (lines)
-  "Return the position based upon the line number."
+(defun log-highlight-position (line)
+  "Return the position based upon the LINE number."
   (save-excursion
-    (forward-line lines)
+    (forward-line line)
     (point)))
 
 (defun log-overlay? (pos)
-  "Return the log overlay if it exists or nil."
+  "Return the log overlay if it exists or nil based upon POS."
   (car (delq nil (mapcar (lambda (x) (overlay-get x 'log-overlay))
 			 (overlays-at pos)))))
 
 (defun log-highlight-visible ()
-  "Highlights the errors that are visible on the screen."
+  "Highlight the errors that are visible on the screen."
   (interactive)
   (when (not buffer-read-only)
     (let* ((height (frame-height))
@@ -154,6 +154,7 @@
     (setq log-mode-idle-registered t)))
 
 (defun log-mode-init ()
+  "Highlight visible errors and enable 'auto-revert-tail-mode if the buffer represents a file."
   (log-highlight-visible)
 
   (when buffer-file-name
@@ -161,6 +162,7 @@
     (add-hook 'after-change-functions 'log-mode-after-change t t)))
 
 (defun log-mode-deinit ()
+  "Disable 'log-mode'."
   (remove-overlays (point-min) (point-max) 'log-overlay t)
   (remove-hook 'after-change-functions 'log-mode-after-change t)
 
