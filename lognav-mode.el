@@ -45,6 +45,7 @@
 ;;
 
 (require 'easymenu)
+(require 'cl-seq)
 
 ;;; Code:
 
@@ -124,8 +125,11 @@
 
 (defun lognav-overlay-p (pos)
   "Return the log overlay if it exists or nil based upon POS."
-  (car (delq nil (mapcar (lambda (x) (overlay-get x 'lognav-overlay))
-			 (overlays-at pos)))))
+  (car (cl-remove-if (lambda (x) (not (overlay-get x 'lognav-overlay)))
+		     (overlays-at pos))))
+
+;;  (car (delq nil (mapcar (lambda (x) (overlay-get x 'lognav-overlay))
+;			 (overlays-at pos)))))
 
 (defun lognav-highlight-visible ()
   "Highlight the errors that are visible on the screen."
@@ -172,7 +176,7 @@
 (define-minor-mode lognav-mode
   "Lognav-mode is a minor mode for finding and navigating errors
   within log files."  nil
-  " Log"
+  " Lognav"
   lognav-mode-map
   (if lognav-mode
       (lognav-mode-init)
