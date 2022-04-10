@@ -1,9 +1,9 @@
 ;;; lognav-mode.el --- Navigate Log Error Messages -*- lexical-binding:t -*-
 
-;; Copyright (C) 2017
+;; Copyright (C) 2017 - 2022
 
 ;; Author: Shawn Ellis <shawn.ellis17@gmail.com>
-;; Version: 0.0.8
+;; Version: 0.0.9
 ;; Package-Requires: ((emacs "24.3"))
 ;; URL: https://hg.osdn.net/view/lognav-mode/lognav-mode
 ;; Keywords: log error lognav-mode convenience
@@ -178,13 +178,12 @@
 ;;;###autoload
 (define-minor-mode lognav-mode
   "Lognav-mode is a minor mode for finding and navigating errors
-  within log files."  nil
-  " Lognav"
-  lognav-mode-map
+  within log files."
+  :lighter " Lognav"
+  :keymap lognav-mode-map
   (if lognav-mode
       (lognav-mode-init)
     (lognav-mode-deinit)))
-
 
 (provide 'lognav-mode)
 
