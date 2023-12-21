@@ -1,9 +1,9 @@
 ;;; lognav-mode.el --- Navigate Log Error Messages -*- lexical-binding:t -*-
 
-;; Copyright (C) 2017 - 2022
+;; Copyright (C) 2017 - 2023
 
 ;; Author: Shawn Ellis <shawn.ellis17@gmail.com>
-;; Version: 0.0.9
+;; Version: 0.0.10
 ;; Package-Requires: ((emacs "24.3"))
 ;; URL: https://hg.osdn.net/view/lognav-mode/lognav-mode
 ;; Keywords: log error lognav-mode convenience
@@ -75,7 +75,7 @@
   (define-key lognav-mode-map "\M-n" 'lognav-next-error))
 
 (easy-menu-define lognav-menu lognav-mode-map
-  "'lognav-mode' menu"
+  "lognav-mode menu"
   '("Lognav"
     ["Next Error" lognav-next-error t]
     ["Previous Error" lognav-previous-error t]
@@ -105,7 +105,6 @@
 	  (move-beginning-of-line 1)
 	  (lognav-highlight-visible))
       (goto-char current))))
-
 
 (defun lognav-highlight-region (begin end)
   "Highlight the region specified by BEGIN and END."
@@ -170,10 +169,9 @@
     (add-hook 'after-change-functions 'lognav-mode-after-change t t)))
 
 (defun lognav-mode-deinit ()
-  "Disable 'lognav-mode'."
+  "Disable lognav-mode."
   (remove-overlays (point-min) (point-max) 'lognav-overlay t)
   (remove-hook 'after-change-functions 'lognav-mode-after-change t))
-
 
 ;;;###autoload
 (define-minor-mode lognav-mode
