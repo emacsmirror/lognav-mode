@@ -49,15 +49,13 @@
 
 ;;; Code:
 
-(defgroup lognav-mode nil
+(defgroup lognav nil
   "Navigate to errors within a buffer or a log file."
   :group 'convenience)
-
 
 (defcustom lognav-regexp "\\(FATAL\\)\\|\\(ERROR\\)\\|\\(WARN\\)\\|\\(SEVERE\\)\\|\\(Caused by:\\)\\|\\(nested exception is:\\)"
   "Regular expression used for navigating errors."
   :type 'regexp)
-
 
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.log\\(\\.[0-9]+\\)?\\'" . lognav-mode))
@@ -79,8 +77,7 @@
   '("Lognav"
     ["Next Error" lognav-next-error t]
     ["Previous Error" lognav-previous-error t]
-    ["Error Occur" lognav-error-occur t]
-    ))
+    ["Error Occur" lognav-error-occur t]))
 
 (defvar-local lognav-mode-idle-registered nil
   "Returns t if an idle timer has already been registered.")
