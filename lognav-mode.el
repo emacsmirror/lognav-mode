@@ -3,7 +3,7 @@
 ;; Copyright (C) 2017 - 2023
 
 ;; Author: Shawn Ellis <shawn.ellis17@gmail.com>
-;; Version: 0.0.10
+;; Version: 0.0.11
 ;; Package-Requires: ((emacs "24.3"))
 ;; URL: https://hg.osdn.net/view/lognav-mode/lognav-mode
 ;; Keywords: log error lognav-mode convenience
@@ -75,7 +75,7 @@
   (define-key lognav-mode-map "\M-n" 'lognav-next-error))
 
 (easy-menu-define lognav-menu lognav-mode-map
-  "lognav-mode menu"
+  "The `lognav-mode' menu definition."
   '("Lognav"
     ["Next Error" lognav-next-error t]
     ["Previous Error" lognav-previous-error t]
@@ -87,7 +87,7 @@
 
 ;;;###autoload
 (defun lognav-previous-error()
-  "Moves the point to the previous error."
+  "Move the point to the previous error."
   (interactive)
   (move-beginning-of-line 1)
   (when (search-backward-regexp lognav-regexp nil t)
@@ -96,7 +96,7 @@
 
 ;;;###autoload
 (defun lognav-next-error()
-  "Moves the point forward to the next error."
+  "Move the point forward to the next error."
   (interactive)
   (let ((current (point)))
     (move-end-of-line 1)
@@ -114,7 +114,7 @@
     lognav-overlay))
 
 (defun lognav-highlight-error (begin end)
-  "Highlight any error within the region specified by BEGIN and END."
+  "Highlight an error within the region specified by BEGIN and END."
   (let ((current (point)))
     (goto-char begin)
     (while (search-forward-regexp lognav-regexp end t)
@@ -169,14 +169,13 @@
     (add-hook 'after-change-functions 'lognav-mode-after-change t t)))
 
 (defun lognav-mode-deinit ()
-  "Disable lognav-mode."
+  "Disable `lognav-mode'."
   (remove-overlays (point-min) (point-max) 'lognav-overlay t)
   (remove-hook 'after-change-functions 'lognav-mode-after-change t))
 
 ;;;###autoload
 (define-minor-mode lognav-mode
-  "Lognav-mode is a minor mode for finding and navigating errors
-  within log files."
+  "Lognav-mode is a minor mode for finding and navigating errors within log files."
   :lighter " Lognav"
   :keymap lognav-mode-map
   (if lognav-mode
