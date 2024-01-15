@@ -1,28 +1,26 @@
 ;;; lognav-mode.el --- Navigate Log Error Messages -*- lexical-binding:t -*-
 
-;; Copyright (C) 2017 - 2023
+;; Copyright (C) 2017 - 2024
 
 ;; Author: Shawn Ellis <shawn.ellis17@gmail.com>
-;; Version: 0.0.11
+;; Version: 0.0.12
 ;; Package-Requires: ((emacs "24.3"))
-;; URL: https://hg.osdn.net/view/lognav-mode/lognav-mode
+;; URL: https://github.com/ellisvelo/lognav-mode.git
 ;; Keywords: log error lognav-mode convenience
 ;;
 
-;; lognav-mode.el is free software; you can redistribute it and/or modify
+;; Lognav-mode is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 2, or (at your option)
+;; the Free Software Foundation; either version 3, or (at your option)
 ;; any later version.
 
-;; lognav-mode.el is distributed in the hope that it will be useful,
+;; Lognav-mode is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 ;; General Public License for more details.
 
 ;; You should have received a copy of the GNU General Public License
-;; along with GNU Emacs; see the file COPYING.  If not, write to the
-;; Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-;; Boston, MA 02111-1307, USA.
+;; along with Lognav-mode.  If not, see <https://www.gnu.org/licenses/>.
 
 ;;; Commentary:
 
